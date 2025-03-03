@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const router = require("./app/module/route/route");
+const { redirectLink } = require("./app/module/file/file.controller");
 
 dotenv.config();
 const port = process.env.port || 5000;
@@ -17,7 +18,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: "https://spontaneous-dieffenbachia-537345.netlify.app",
-    credentials: true
+    credentials: true,
   })
 );
 
@@ -36,6 +37,7 @@ mongoose
 });
 
 app.use("/api/v1", router);
+app.get(`/file/share/:id`, redirectLink);
 
 app.get("/", (req, res) => {
   res.send("Project is running!");

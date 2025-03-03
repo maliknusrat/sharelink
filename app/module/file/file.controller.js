@@ -28,7 +28,12 @@ const redirectLink = catchAsync(async (req, res) => {
   const id = req.params.id;
   const token = req.headers.authorization;
   const result = await getOriginalFile(id, token);
-  res.redirect(result);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: `Url Got`,
+    data: result,
+  });
 });
 
 const deleteShareLink = catchAsync(async (req, res) => {
